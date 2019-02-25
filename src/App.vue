@@ -1,12 +1,22 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+  <div id="app" class="body">
+    <Header />
     <router-view/>
+    <Footer/>
   </div>
 </template>
+<script>
+import Footer from '@/components/footer.vue';
+import Header from '@/components/header.vue';
+export default {
+  name: "App",
+  components:{
+        Header,
+        Footer
+    }
+}
+</script>
+
 
 <style lang="scss">
 #app {
@@ -25,5 +35,8 @@
       color: #42b983;
     }
   }
+}
+.cursor_pointer{
+  cursor: pointer;
 }
 </style>

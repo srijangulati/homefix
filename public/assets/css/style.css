@@ -1,0 +1,51 @@
+.range_key {
+	display:block;
+	line-height: 40px;
+	height: 40px;
+	vertical-align: middle;
+	background-color:#fff;
+	text-align:right;
+}
+.range_value {
+	display:block;
+	padding: 10px;
+	vertical-align: middle;
+}
+.range_divider {
+	display:block;
+	line-height: 40px;
+	height: 40px;
+	vertical-align: middle;
+}
+table.fee-profile th,
+table.fee-profile td {
+	padding: 5px;
+}
+table.fee-profile .cell-data{
+	/*max-width: 10%;*/
+}
+.loadinggifbox {
+	position: relative;
+}
+.loadinggif {
+ z-index: 111111;
+ background-color: #fff;
+ opacity: 0.7;
+ display: block;
+ height: 100%;
+ width: 100%;
+}
+.loadinggif img {
+	margin: auto;
+}
+.nicEdit-main {
+	padding-right: 15px !important;
+	width: 98%!important;
+}
+
+.dataTables_filter input {
+	width: 250px!important;
+}
+.clear {
+	clear: both;
+}
