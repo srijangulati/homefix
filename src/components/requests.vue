@@ -16,7 +16,8 @@
 				</section>
 				<section class="section section-content-pull-top pull-top-level-1 pull-top-always pt-0">
 				  <div class="container w3-white border box-shadow p-4" style="min-height: 300px;">
-					<div class="row" v-if="checkIfLoaded()" v-for="(request, index) in requests[active]" :key="index">
+                      <div v-if="requests[active].isEmpty">No Requests</div>
+					<div class="row" v-if="checkIfLoaded()" v-for="(request, index) in requests[active].value" :key="index">
 					 <div class="col">
       	      	           
                     <div class="service-list mb-3 w3-border-bottom">
@@ -68,14 +69,17 @@
 import { mapState, mapActions } from 'vuex';
 const REQUEST_TYPES = [
     {
-        name: 'NEW REQUEST',
+        name: 'NEW REQUESTS',
         id: 'new'
     },{
-        name: 'ONGOING REQUEST',
+        name: 'ONGOING REQUESTS',
         id: 'processing'
     },{
-        name: 'COMPLETED REQUEST',
+        name: 'COMPLETED REQUESTS',
         id: 'completed'
+    },{
+        name: 'CANCELLED REQUESTS',
+        id: 'cancelled'
     }
 ];
 export default {

@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import * as request from '@/api/requests';
-import { stat } from 'fs';
 
 Vue.use(Vuex)
 
@@ -11,9 +10,30 @@ export default new Vuex.Store({
     csr_rid: window.localStorage.getItem('csa_rid') || null,
     userData: null,
     requests: {
-      new: [],
-      processing: [],
-      completed: []
+      new: {
+        value: [],
+        loading: false,
+        isEmpty: false,
+        error: null
+      },
+      processing: {
+        value: [],
+        loading: false,
+        isEmpty: false,
+        error: null
+      },
+      completed: {
+        value: [],
+        loading: false,
+        isEmpty: false,
+        error: null
+      },
+      cancelled: {
+        value: [],
+        loading: false,
+        isEmpty: false,
+        error: null
+      }
     },
     loading: false
   },
@@ -25,7 +45,12 @@ export default new Vuex.Store({
       state.userData = payload;
     },
     UPDATE_REQUEST_TYPE(state, payload){
-      state.requests[payload.type] = Object.values(payload.requests.active.request_detail);
+      if(payload.requests.length === 0){
+        state.requests[payload.type].isEmpty = true;
+      } else{
+        state.requests[payload.type].isEmpty = false
+      }
+      state.requests[payload.type].value = Object.values(payload.requests);
     }
   },
   actions: {

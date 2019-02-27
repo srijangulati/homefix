@@ -11,5 +11,5 @@ export function login(obj){
 }
 
 export function getRequests(type){
-    return HTTP.get(URLS.GET_REQUESTS+window.localStorage.getItem('csa_rid')+'/'+type, {}).then((res)=>res.data);
+    return HTTP.get(URLS.REQUESTS+window.localStorage.getItem('csa_rid')+'/'+type, {}).then((res)=>res.data);
 }
