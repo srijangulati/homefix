@@ -24,18 +24,18 @@
               <div class="row">
                 <div class="col-sm-3 col-xs-4">
                   <div class="picture">
-                  <img width="100%" :src="'https://homefix.ng/media/services/'+request.service.category.cat_image"></div>
+                  <img width="100%" :src="'https://homefix.ng/media/requests/photos/'+getPhoto(request.photos)"></div>
                 </div>
                 <div class="col-sm-6 col-xs-8 mt-3">
                   <dl class="row">
                     <dt class="col-sm-3">SERVICE</dt>
-                    <dd class="col-sm-9 bold text-3 service-name">{{request.service.service_name}}</dd>
+                    <dd class="col-sm-9 bold text-3 service-name">{{request.service_name}}</dd>
                     <dt class="col-sm-3">CATEGORY</dt>
-                    <dd class="col-sm-9 service-category">{{request.service.category.cat_name}}</dd>
+                    <dd class="col-sm-9 service-category">{{request.cat_name}}</dd>
                     <dt class="col-sm-3">STATUS</dt>
                     <dd class="col-sm-9" v-html="request.status_text"></dd>
                     <dt class="col-sm-3">DATE</dt>
-                    <dd class="col-sm-9">Sat 29th December, 2018 06:39pm</dd>
+                    <dd class="col-sm-9">{{getDate(request.request_date)}}</dd>
                     <dt class="col-sm-3">CSA</dt>
                     <dd class="col-sm-9">
 						Not assigned                    </dd>
@@ -43,7 +43,7 @@
                 </div>
                 <div class="col-sm-2 col-xs-12">
                   <div class="service-list-right-side text-center mt-3"> 
-                  	<a data-request="20181229183923851505" target="_blank" :href="'https://homefix.ng/dashboard/requests-detail/'+request.request_rid" class="btn btn-warning btn-fill btn-block btn-download btn-round w3-round-xxlarge bold"> <i class="fa fa-search" aria-hidden="true"></i> DETAIL </a>
+                  	<a data-request="20181229183923851505" :href="'https://homefix.ng/dashboard/requests-detail/'+request.request_rid" class="btn btn-warning btn-fill btn-block btn-download btn-round w3-round-xxlarge bold"> <i class="fa fa-search" aria-hidden="true"></i> DETAIL </a>
                     <div class="review-section mt-2">
                     RATE SERVICE
                       <div class="rating-input cursor mt-1" data-request="request_rid">
@@ -67,13 +67,14 @@
 </template>
 <script>
 import { mapState, mapActions } from 'vuex';
+import moment from 'moment';
 const REQUEST_TYPES = [
     {
         name: 'NEW REQUESTS',
         id: 'new'
     },{
         name: 'ONGOING REQUESTS',
-        id: 'processing'
+        id: 'ongoing'
     },{
         name: 'COMPLETED REQUESTS',
         id: 'completed'
@@ -114,6 +115,16 @@ export default {
                 return true;
             }
             return false;
+        },
+        getDate(date){
+            return moment(date).format('LLLL');
+        },
+        getPhoto(photos){
+            if(photos){
+                const p = JSON.parse(photos);
+                return p[0];
+            }
+            return '';
         },
         ...mapActions(['getRequests'])
     }

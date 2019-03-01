@@ -16,7 +16,7 @@ export default new Vuex.Store({
         isEmpty: false,
         error: null
       },
-      processing: {
+      ongoing: {
         value: [],
         loading: false,
         isEmpty: false,
@@ -79,7 +79,7 @@ export default new Vuex.Store({
       request.getRequests(payload).then(res=>{
         commit('UPDATE_REQUEST_TYPE',{
           type: payload,
-          requests: res.result
+          requests: res.result.paid || []
         })
       })
     }
