@@ -24,7 +24,7 @@
               <div class="row">
                 <div class="col-sm-3 col-xs-4">
                   <div class="picture">
-                  <img width="100%" :src="'https://homefix.ng/media/requests/photos/'+getPhoto(request.photos)"></div>
+                  <img width="100%" v-if="getPhoto(request.photos)" :src="'https://homefix.ng/media/requests/photos/'+getPhoto(request.photos)"></div>
                 </div>
                 <div class="col-sm-6 col-xs-8 mt-3">
                   <dl class="row">
@@ -124,7 +124,7 @@ export default {
                 const p = JSON.parse(photos);
                 return p[0];
             }
-            return '';
+            return false;
         },
         ...mapActions(['getRequests'])
     }
