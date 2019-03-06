@@ -29,21 +29,21 @@
                 <div class="col-sm-6 col-xs-8 mt-3">
                   <dl class="row">
                     <dt class="col-sm-3">SERVICE</dt>
-                    <dd class="col-sm-9 bold text-3 service-name">{{request.service_name}}</dd>
+                    <dd class="col-sm-9 bold text-3 service-name left">{{request.service_name}}</dd>
                     <dt class="col-sm-3">CATEGORY</dt>
-                    <dd class="col-sm-9 service-category">{{request.cat_name}}</dd>
+                    <dd class="col-sm-9 service-category left">{{request.service.category.cat_name}}</dd>
                     <dt class="col-sm-3">STATUS</dt>
-                    <dd class="col-sm-9" v-html="request.status_text"></dd>
+                    <dd class="col-sm-9 left" v-html="request.status_text"></dd>
                     <dt class="col-sm-3">DATE</dt>
-                    <dd class="col-sm-9">{{getDate(request.request_date)}}</dd>
+                    <dd class="col-sm-9 left ">{{getDate(request.request_date)}}</dd>
                     <dt class="col-sm-3">CSA</dt>
-                    <dd class="col-sm-9">
-						Not assigned                    </dd>
+                    <dd class="col-sm-9 left">
+						{{request.csa_assigned_date?'Assigned':'Not assigned'}}                   </dd>
                   </dl>
                 </div>
                 <div class="col-sm-2 col-xs-12">
                   <div class="service-list-right-side text-center mt-3"> 
-                  	<a data-request="20181229183923851505" :href="'https://homefix.ng/dashboard/requests-detail/'+request.request_rid" class="btn btn-warning btn-fill btn-block btn-download btn-round w3-round-xxlarge bold"> <i class="fa fa-search" aria-hidden="true"></i> DETAIL </a>
+                  	<a data-request="20181229183923851505" @click="selectedRequest = request" class="btn btn-warning btn-fill btn-block btn-download btn-round w3-round-xxlarge bold"> <i class="fa fa-search" aria-hidden="true"></i> DETAIL </a>
                     <div class="review-section mt-2">
                     RATE SERVICE
                       <div class="rating-input cursor mt-1" data-request="request_rid">
@@ -63,11 +63,14 @@
 			</div>
 			</div>
 		</section>
+        <Modal v-if="selectedRequest" @close="selectedRequest = null" ><Details :request="selectedRequest"/></Modal>
 	</div>
 </template>
 <script>
 import { mapState, mapActions } from 'vuex';
 import moment from 'moment';
+import Modal from './modal.vue';
+import Details from './details.vue'
 const REQUEST_TYPES = [
     {
         name: 'NEW REQUESTS',
@@ -87,7 +90,8 @@ export default {
     name: "Requests",
     data:function(){
         return {
-            active:'new'
+            active:'new',
+            selectedRequest: null
         };
     },
     mounted(){
@@ -127,6 +131,20 @@ export default {
             return false;
         },
         ...mapActions(['getRequests'])
+    },
+    components:{
+        Modal,
+        Details
     }
 }
 </script>
+<style lang="scss">
+.left{
+    text-align: left;
+    padding-left: 10%;
+}
+img{
+    padding-top: 20px;
+}
+</style>
+

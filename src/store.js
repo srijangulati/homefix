@@ -79,7 +79,7 @@ export default new Vuex.Store({
       request.getRequests(payload).then(res=>{
         commit('UPDATE_REQUEST_TYPE',{
           type: payload,
-          requests: res.result.paid || []
+          requests: res.result || []
         })
       })
     }

@@ -16,12 +16,12 @@
 										<nav class="collapse">
 											<ul class="nav flex-column flex-lg-row" id="mainNav">
 												<li class="dropdown dropdown-mega">
-													<a class="dropdown-item active" href="index.html">
+													<a class="dropdown-item active" href="#">
 														REQUESTS
 													</a>
 												</li>
                                                 <li class="dropdown dropdown-mega dropdown-mega-style-2">
-													<a class="dropdown-item" href="transaction.html">
+													<a class="dropdown-item" href="#">
 														TRANSACTIONS
 													</a>
 												</li>
@@ -31,7 +31,7 @@
 													</a>
 												</li>
                                                 <li class="dropdown dropdown-mega dropdown-mega-style-2">
-													<a class="dropdown-item" href="#">
+													<a class="dropdown-item" @click="logout" href="#">
 														LOGOUT
 													</a>
 												</li>
@@ -56,3 +56,16 @@
 				</div>
 			</header>
 </template>
+<script>
+export default {
+	name:"header",
+	methods:{
+		logout: function(){
+			window.localStorage.setItem('csa_rid','');
+			this.$router.push({
+				name: 'Login'
+			})
+		}
+	}
+}
+</script>
